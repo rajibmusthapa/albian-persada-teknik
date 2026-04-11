@@ -3,60 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Super Lengkap - ALBIAN PERSADA TEKNIK</title>
+  <title>Dashboard - ALBIAN PERSADA TEKNIK</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .stat-card { transition: all 0.3s ease; }
+    .stat-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.1); }
+  </style>
 </head>
-<body class="bg-gray-100">
-  <nav class="bg-blue-900 text-white p-4">
+<body class="bg-gray-50">
+  <nav class="bg-gradient-to-r from-blue-900 to-blue-800 text-white p-4 shadow-lg sticky top-0 z-50">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-xl font-bold"><i class="fas fa-swimmer mr-2"></i>ALBIAN PERSADA TEKNIK Admin</h1>
+      <div class="flex items-center space-x-3">
+        <i class="fas fa-swimmer text-2xl text-yellow-400"></i>
+        <div>
+          <h1 class="text-xl font-bold">ALBIAN PERSADA TEKNIK</h1>
+          <p class="text-xs text-blue-200">Admin Panel</p>
+        </div>
+      </div>
       <div class="space-x-4">
-        <a href="dashboard.html" class="text-yellow-400">Dashboard</a>
-        <a href="proyek.html" class="hover:text-yellow-400">Proyek</a>
-        <a href="stok.html" class="hover:text-yellow-400">Stok</a>
-        <a href="cabang.html" class="hover:text-yellow-400">Cabang</a>
-        <a href="../index.html" class="hover:text-yellow-400">Website</a>
-        <button id="logoutBtn" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">Logout</button>
+        <a href="dashboard.html" class="px-3 py-2 rounded-lg bg-yellow-600 text-white">Dashboard</a>
+        <a href="proyek.html" class="px-3 py-2 rounded-lg hover:bg-blue-700 transition">Proyek</a>
+        <a href="stok.html" class="px-3 py-2 rounded-lg hover:bg-blue-700 transition">Stok</a>
+        <a href="cabang.html" class="px-3 py-2 rounded-lg hover:bg-blue-700 transition">Cabang</a>
+        <a href="../index.html" class="px-3 py-2 rounded-lg hover:bg-blue-700 transition">Website</a>
+        <button id="logoutBtn" class="bg-red-600 px-4 py-2 rounded-lg hover:bg-red-700 transition">Logout</button>
       </div>
     </div>
   </nav>
 
   <div class="container mx-auto p-6">
-    <h2 class="text-2xl font-bold mb-6">📊 Dashboard Super Lengkap</h2>
+    <!-- Welcome Section -->
+    <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 text-white mb-8 shadow-xl">
+      <h2 class="text-3xl font-bold">Selamat Datang, Admin!</h2>
+      <p class="text-blue-100 mt-2">Kelola proyek, stok, dan cabang dengan mudah.</p>
+    </div>
 
-    <!-- Statistik Cards -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" id="statsCards">
-      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-swimming-pool text-3xl text-blue-800 mb-2"></i><p class="text-3xl font-bold" id="totalProyek">-</p><p>Total Proyek</p></div>
-      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-check-circle text-3xl text-green-600 mb-2"></i><p class="text-3xl font-bold" id="proyekSelesai">-</p><p>Proyek Selesai</p></div>
-      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-spinner text-3xl text-yellow-500 mb-2"></i><p class="text-3xl font-bold" id="proyekProses">-</p><p>Proyek Proses</p></div>
-      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-users text-3xl text-blue-800 mb-2"></i><p class="text-3xl font-bold" id="totalKlien">-</p><p>Total Klien</p></div>
-      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-boxes text-3xl text-blue-800 mb-2"></i><p class="text-3xl font-bold" id="totalStok">-</p><p>Total Stok</p></div>
-      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-store text-3xl text-blue-800 mb-2"></i><p class="text-3xl font-bold" id="totalCabang">-</p><p>Total Cabang</p></div>
-      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-money-bill text-3xl text-green-600 mb-2"></i><p class="text-3xl font-bold" id="totalPendapatan">-</p><p>Total Pendapatan</p></div>
-      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-calendar-alt text-3xl text-blue-800 mb-2"></i><p class="text-3xl font-bold" id="pendapatanBulanIni">-</p><p>Pendapatan Bulan Ini</p></div>
+    <!-- Stats Cards Row 1 -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6" id="statsRow1">
+      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-blue-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Total Proyek</p><p class="text-3xl font-bold text-gray-800" id="totalProyek">-</p></div><i class="fas fa-swimming-pool text-4xl text-blue-600 opacity-50"></i></div></div>
+      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-green-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Proyek Selesai</p><p class="text-3xl font-bold text-gray-800" id="proyekSelesai">-</p></div><i class="fas fa-check-circle text-4xl text-green-600 opacity-50"></i></div></div>
+      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-yellow-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Proyek Proses</p><p class="text-3xl font-bold text-gray-800" id="proyekProses">-</p></div><i class="fas fa-spinner text-4xl text-yellow-600 opacity-50"></i></div></div>
+      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-purple-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Total Klien</p><p class="text-3xl font-bold text-gray-800" id="totalKlien">-</p></div><i class="fas fa-users text-4xl text-purple-600 opacity-50"></i></div></div>
+    </div>
+
+    <!-- Stats Cards Row 2 -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8" id="statsRow2">
+      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-teal-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Total Stok</p><p class="text-3xl font-bold text-gray-800" id="totalStok">-</p></div><i class="fas fa-boxes text-4xl text-teal-600 opacity-50"></i></div></div>
+      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-indigo-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Total Cabang</p><p class="text-3xl font-bold text-gray-800" id="totalCabang">-</p></div><i class="fas fa-store text-4xl text-indigo-600 opacity-50"></i></div></div>
+      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-emerald-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Total Pendapatan</p><p class="text-3xl font-bold text-gray-800" id="totalPendapatan">-</p></div><i class="fas fa-money-bill-wave text-4xl text-emerald-600 opacity-50"></i></div></div>
+      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-rose-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Pendapatan Bulan Ini</p><p class="text-3xl font-bold text-gray-800" id="pendapatanBulanIni">-</p></div><i class="fas fa-calendar-alt text-4xl text-rose-600 opacity-50"></i></div></div>
     </div>
 
     <!-- Alert Stok Menipis -->
-    <div id="alertStok" class="hidden mb-4 p-3 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded"></div>
+    <div id="alertStok" class="hidden mb-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-lg shadow"></div>
 
-    <!-- Chart & Proyek Terbaru -->
-    <div class="grid md:grid-cols-2 gap-6 mb-8">
-      <div class="bg-white p-4 rounded-lg shadow">
-        <h3 class="font-bold text-lg mb-4">📈 Proyek per Bulan</h3>
+    <!-- Charts & Recent Projects -->
+    <div class="grid lg:grid-cols-2 gap-6 mb-6">
+      <div class="bg-white rounded-xl shadow-md p-5">
+        <h3 class="font-bold text-lg mb-4 flex items-center"><i class="fas fa-chart-line text-blue-600 mr-2"></i>📈 Proyek per Bulan</h3>
         <canvas id="proyekChart" height="200"></canvas>
       </div>
-      <div class="bg-white p-4 rounded-lg shadow">
-        <h3 class="font-bold text-lg mb-4">🆕 Proyek Terbaru (5 Terakhir)</h3>
-        <div id="proyekTerbaru" class="space-y-2"></div>
+      <div class="bg-white rounded-xl shadow-md p-5">
+        <h3 class="font-bold text-lg mb-4 flex items-center"><i class="fas fa-chart-pie text-green-600 mr-2"></i>🥧 Stok per Kategori</h3>
+        <canvas id="kategoriChart" height="200"></canvas>
       </div>
     </div>
 
-    <!-- Kategori Stok -->
-    <div class="bg-white p-4 rounded-lg shadow">
-      <h3 class="font-bold text-lg mb-4">📦 Stok per Kategori</h3>
-      <canvas id="kategoriChart" height="100"></canvas>
+    <!-- Recent Projects Table -->
+    <div class="bg-white rounded-xl shadow-md p-5">
+      <h3 class="font-bold text-lg mb-4 flex items-center"><i class="fas fa-history text-blue-600 mr-2"></i>📋 Proyek Terbaru</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead class="bg-gray-100">
+            <tr><th class="p-3 text-left">Nama Proyek</th><th class="p-3 text-left">Jenis</th><th class="p-3 text-left">Lokasi</th><th class="p-3 text-left">Status</th></tr>
+          </thead>
+          <tbody id="proyekTerbaru"></tbody>
+        </table>
+      </div>
     </div>
   </div>
 
@@ -68,7 +93,6 @@
     let proyekChart, kategoriChart;
 
     async function loadDashboard() {
-      // Ambil data dari API
       const resProyek = await fetch('/api/proyek');
       const proyek = await resProyek.json();
       const resStok = await fetch('/api/stok');
@@ -76,7 +100,6 @@
       const resCabang = await fetch('/api/cabang');
       const cabang = await resCabang.json();
 
-      // Hitung statistik
       const totalProyek = proyek.length;
       const proyekSelesai = proyek.filter(p => p.status === 'Selesai').length;
       const proyekProses = proyek.filter(p => p.status === 'Proses').length;
@@ -84,11 +107,8 @@
       const totalStok = stok.reduce((sum, s) => sum + s.stok, 0);
       const totalCabang = cabang.length;
       const totalPendapatan = proyek.reduce((sum, p) => sum + (p.nilai || 0), 0);
-      
-      // Pendapatan bulan ini (contoh sederhana: 20% dari total)
       const pendapatanBulanIni = Math.round(totalPendapatan * 0.2);
 
-      // Update tampilan
       document.getElementById('totalProyek').textContent = totalProyek;
       document.getElementById('proyekSelesai').textContent = proyekSelesai;
       document.getElementById('proyekProses').textContent = proyekProses;
@@ -98,56 +118,30 @@
       document.getElementById('totalPendapatan').textContent = 'Rp ' + totalPendapatan.toLocaleString();
       document.getElementById('pendapatanBulanIni').textContent = 'Rp ' + pendapatanBulanIni.toLocaleString();
 
-      // Alert stok menipis
       const menipis = stok.filter(s => s.stok < 10);
       const alertDiv = document.getElementById('alertStok');
       if (menipis.length > 0) {
         alertDiv.classList.remove('hidden');
-        alertDiv.innerHTML = `<i class="fas fa-exclamation-triangle mr-2"></i> ⚠️ ${menipis.length} produk stok menipis (stok < 10)! Segera restok.`;
+        alertDiv.innerHTML = `<i class="fas fa-exclamation-triangle mr-2"></i> ⚠️ ${menipis.length} produk stok menipis (stok < 10)! Segera lakukan restok.`;
       }
 
-      // Proyek terbaru (5 terakhir)
       const proyekTerbaru = [...proyek].reverse().slice(0, 5);
       const container = document.getElementById('proyekTerbaru');
       container.innerHTML = proyekTerbaru.map(p => `
-        <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
-          <span><i class="fas fa-swimmer mr-2 text-blue-600"></i>${p.nama}</span>
-          <span class="text-sm ${p.status === 'Selesai' ? 'text-green-600' : 'text-yellow-600'}">${p.status}</span>
-        </div>
+        <tr class="border-b hover:bg-gray-50"><td class="p-3 font-medium">${p.nama}</td><td class="p-3">${p.jenis || '-'}</td><td class="p-3">${p.lokasi || '-'}</td><td class="p-3"><span class="px-2 py-1 rounded-full text-xs ${p.status === 'Selesai' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'}">${p.status}</span></td></tr>
       `).join('');
 
-      // Chart proyek per bulan (contoh: data dummy per bulan)
       const bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
       const dataBulan = new Array(12).fill(0);
-      proyek.forEach(p => {
-        if (p.tanggalMulai) {
-          const bulanIndex = new Date(p.tanggalMulai).getMonth();
-          dataBulan[bulanIndex]++;
-        } else {
-          // Data dummy jika tidak ada tanggal
-          dataBulan[Math.floor(Math.random() * 12)]++;
-        }
-      });
+      proyek.forEach(p => { if (p.tanggalMulai) dataBulan[new Date(p.tanggalMulai).getMonth()]++; });
       if (proyekChart) proyekChart.destroy();
-      const ctx = document.getElementById('proyekChart').getContext('2d');
-      proyekChart = new Chart(ctx, {
-        type: 'bar',
-        data: { labels: bulan, datasets: [{ label: 'Jumlah Proyek', data: dataBulan, backgroundColor: '#1E3A8A' }] },
-        options: { responsive: true, maintainAspectRatio: true }
-      });
+      proyekChart = new Chart(document.getElementById('proyekChart'), { type: 'bar', data: { labels: bulan, datasets: [{ label: 'Jumlah Proyek', data: dataBulan, backgroundColor: '#2563EB', borderRadius: 8 }] }, options: { responsive: true, maintainAspectRatio: true } });
 
-      // Chart stok per kategori
       const kategori = {};
       stok.forEach(s => { kategori[s.kategori] = (kategori[s.kategori] || 0) + s.stok; });
       if (kategoriChart) kategoriChart.destroy();
-      const ctx2 = document.getElementById('kategoriChart').getContext('2d');
-      kategoriChart = new Chart(ctx2, {
-        type: 'doughnut',
-        data: { labels: Object.keys(kategori), datasets: [{ data: Object.values(kategori), backgroundColor: ['#1E3A8A', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899', '#06B6D4'] }] },
-        options: { responsive: true, maintainAspectRatio: true }
-      });
+      kategoriChart = new Chart(document.getElementById('kategoriChart'), { type: 'doughnut', data: { labels: Object.keys(kategori), datasets: [{ data: Object.values(kategori), backgroundColor: ['#2563EB', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899'] }] }, options: { responsive: true, maintainAspectRatio: true } });
     }
-
     loadDashboard();
   </script>
 </body>
