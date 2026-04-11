@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "nama": "Pak M. Yulfan",
+    "jenis": "Semi Overflow",
+    "ukuran": "4m × 7m",
+    "lokasi": "G.N. Bandar, Bogor",
+    "status": "Selesai",
+    "nilai": 45000000
+  },
+  {
+    "id": 2,
+    "nama": "Pak Ruli",
+    "jenis": "Semi Overflow",
+    "ukuran": "4m × 3m",
+    "lokasi": "-",
+    "status": "Selesai",
+    "nilai": 35000000
+  },
+  {
+    "id": 3,
+    "nama": "Ibu Hikmah",
+    "jenis": "Semi Overflow",
+    "ukuran": "7m × 3m",
+    "lokasi": "Cilodong",
+    "status": "Selesai",
+    "nilai": 55000000
+  }
+]

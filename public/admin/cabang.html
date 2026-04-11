@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manajemen Cabang - ALBIAN PERSADA TEKNIK</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+  <nav class="bg-blue-900 text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold"><i class="fas fa-swimmer mr-2"></i>ALBIAN PERSADA TEKNIK Admin</h1>
+      <div class="space-x-4">
+        <a href="dashboard.html" class="hover:text-yellow-400">Dashboard</a>
+        <a href="proyek.html" class="hover:text-yellow-400">Proyek</a>
+        <a href="stok.html" class="hover:text-yellow-400">Stok</a>
+        <a href="cabang.html" class="text-yellow-400">Cabang</a>
+        <a href="../index.html" class="hover:text-yellow-400">Website</a>
+        <button id="logoutBtn" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mx-auto p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold">📍 Manajemen Cabang</h2>
+      <button onclick="showModal()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">+ Tambah Cabang</button>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="cabangList"></div>
+  </div>
+
+  <!-- Modal Tambah/Edit -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+      <h3 id="modalTitle" class="text-xl font-bold mb-4">Tambah Cabang</h3>
+      <form id="cabangForm">
+        <input type="hidden" id="cabangId">
+        <div class="mb-3"><label class="block font-semibold">Nama Cabang</label><input type="text" id="nama" class="w-full p-2 border rounded" required></div>
+        <div class="mb-3"><label class="block font-semibold">Alamat Lengkap</label><textarea id="alamat" rows="3" class="w-full p-2 border rounded" required></textarea></div>
+        <div class="mb-3"><label class="block font-semibold">Telepon</label><input type="text" id="telepon" class="w-full p-2 border rounded" required></div>
+        <div class="mb-3"><label class="block font-semibold">WhatsApp</label><input type="text" id="wa" class="w-full p-2 border rounded" placeholder="6281291565358" required></div>
+        <div class="mb-3"><label class="block font-semibold">Jam Operasional</label><input type="text" id="jamOperasional" class="w-full p-2 border rounded" placeholder="Senin-Sabtu: 08:00-17:00"></div>
+        <div class="mb-3"><label class="block font-semibold">Layanan Unggulan</label><textarea id="layanan" rows="2" class="w-full p-2 border rounded" placeholder="Kolam Renang, Waterpark, dll"></textarea></div>
+        <div class="flex justify-end gap-2 mt-4">
+          <button type="button" onclick="hideModal()" class="px-4 py-2 bg-gray-300 rounded">Batal</button>
+          <button type="submit" class="px-4 py-2 bg-blue-800 text-white rounded">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const user = localStorage.getItem('adminUser');
+    if (!user) window.location.href = 'login.html';
+    document.getElementById('logoutBtn').onclick = () => { localStorage.removeItem('adminUser'); window.location.href = 'login.html'; };
+
+    let cabangData = [];
+
+    async function loadCabang() {
+      const res = await fetch('/api/cabang');
+      cabangData = await res.json();
+      const container = document.getElementById('cabangList');
+      container.innerHTML = cabangData.map(c => `
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="bg-blue-800 text-white p-3 flex justify-between items-center">
+            <h3 class="font-bold"><i class="fas fa-store mr-2"></i>${c.nama}</h3>
+            <div>
+              <button onclick="editCabang(${c.id})" class="text-yellow-400 hover:text-yellow-300 mr-2"><i class="fas fa-edit"></i></button>
+              <button onclick="deleteCabang(${c.id})" class="text-red-400 hover:text-red-300"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+          <div class="p-4">
+            <p class="text-sm text-gray-600 mb-2"><i class="fas fa-map-marker-alt mr-1 text-red-500"></i> ${c.alamat}</p>
+            <p class="text-sm mb-1"><i class="fas fa-phone mr-1 text-green-500"></i> ${c.telepon}</p>
+            <p class="text-sm mb-2"><i class="fab fa-whatsapp mr-1 text-green-500"></i> ${c.wa}</p>
+            <p class="text-xs text-gray-500 mb-2"><i class="fas fa-clock mr-1"></i> ${c.jamOperasional || '-'}</p>
+            <p class="text-xs text-blue-600"><i class="fas fa-tag mr-1"></i> ${c.layanan || 'Semua layanan kolam renang'}</p>
+            <div class="mt-3 flex gap-2">
+              <a href="https://wa.me/${c.wa}?text=Halo%20ALBIAN%20PERSADA%20TEKNIK" target="_blank" class="bg-green-500 text-white text-xs px-3 py-1 rounded hover:bg-green-600">Chat WA</a>
+              <button onclick="lihatPeta('${c.alamat}')" class="bg-blue-500 text-white text-xs px-3 py-1 rounded hover:bg-blue-600">Lihat Peta</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function showModal(id = null) {
+      document.getElementById('modal').classList.remove('hidden');
+      document.getElementById('modal').classList.add('flex');
+      if (id) {
+        document.getElementById('modalTitle').textContent = 'Edit Cabang';
+        const cabang = cabangData.find(c => c.id === id);
+        if (cabang) {
+          document.getElementById('cabangId').value = cabang.id;
+          document.getElementById('nama').value = cabang.nama;
+          document.getElementById('alamat').value = cabang.alamat;
+          document.getElementById('telepon').value = cabang.telepon;
+          document.getElementById('wa').value = cabang.wa;
+          document.getElementById('jamOperasional').value = cabang.jamOperasional || '';
+          document.getElementById('layanan').value = cabang.layanan || '';
+        }
+      } else {
+        document.getElementById('modalTitle').textContent = 'Tambah Cabang';
+        document.getElementById('cabangForm').reset();
+        document.getElementById('cabangId').value = '';
+      }
+    }
+
+    function hideModal() {
+      document.getElementById('modal').classList.add('hidden');
+      document.getElementById('modal').classList.remove('flex');
+    }
+
+    function editCabang(id) { showModal(id); }
+
+    async function deleteCabang(id) {
+      if (confirm('Yakin hapus cabang ini?')) {
+        await fetch(`/api/cabang/${id}`, { method: 'DELETE' });
+        loadCabang();
+      }
+    }
+
+    function lihatPeta(alamat) {
+      window.open(`https://maps.google.com?q=${encodeURIComponent(alamat)}`, '_blank');
+    }
+
+    document.getElementById('cabangForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('cabangId').value;
+      const data = {
+        nama: document.getElementById('nama').value,
+        alamat: document.getElementById('alamat').value,
+        telepon: document.getElementById('telepon').value,
+        wa: document.getElementById('wa').value,
+        jamOperasional: document.getElementById('jamOperasional').value,
+        layanan: document.getElementById('layanan').value
+      };
+      
+      if (id) {
+        await fetch(`/api/cabang/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      } else {
+        await fetch('/api/cabang', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      }
+      hideModal();
+      loadCabang();
+    });
+
+    loadCabang();
+  </script>
+</body>
+</html>

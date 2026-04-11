@@ -1,0 +1,17 @@
+.git/
+.env*
+*.zip
+*.tar.gz
+*.sql
+*.bak
+*.old
+*.php
+**/*.bak
+**/*.old
+.git
+.env*
+*.zip
+*.tar.gz
+*.sql
+*.bak
+*.old

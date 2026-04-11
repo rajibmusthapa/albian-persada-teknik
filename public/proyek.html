@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyek - ALBIAN PERSADA TEKNIK</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <nav class="bg-blue-900 text-white p-4 sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between">
+      <h1 class="text-2xl font-bold"><i class="fas fa-swimmer mr-2"></i>ALBIAN PERSADA TEKNIK</h1>
+      <div class="space-x-4">
+        <a href="index.html" class="hover:text-yellow-400">Beranda</a>
+        <a href="layanan.html" class="hover:text-yellow-400">Layanan</a>
+        <a href="proyek.html" class="text-yellow-400">Proyek</a>
+        <a href="produk.html" class="hover:text-yellow-400">Produk</a>
+        <a href="tentang.html" class="hover:text-yellow-400">Tentang</a>
+        <a href="kontak.html" class="hover:text-yellow-400">Kontak</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="bg-blue-900 text-white py-16 text-center">
+    <h1 class="text-4xl font-bold">Proyek Kami</h1>
+    <p class="text-xl mt-2">Berikut adalah proyek yang telah kami selesaikan</p>
+  </section>
+
+  <section class="container mx-auto py-16 px-4">
+    <div id="daftar-proyek" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
+
+  <footer class="bg-gray-800 text-white py-8 text-center">
+    <p>&copy; 2025 ALBIAN PERSADA TEKNIK</p>
+    <p>📞 WA: 0812 9156 5358 | Telepon: (021) 77974824</p>
+    <p class="text-sm mt-4">Website by <strong class="text-yellow-400">RDS Rajib Digital Solution</strong> | Developer: <strong class="text-yellow-400">Rajib Dev</strong></p>
+  </footer>
+
+  <script>
+    fetch('/api/proyek')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('daftar-proyek');
+        container.innerHTML = data.map(p => `
+          <div class="bg-white p-6 rounded-xl shadow-lg">
+            <div class="flex justify-between items-start">
+              <h3 class="font-bold text-xl text-blue-800">${p.nama}</h3>
+              <span class="px-2 py-1 rounded-full text-xs ${p.status === 'Selesai' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'}">${p.status}</span>
+            </div>
+            <p class="text-gray-600 mt-2"><i class="fas fa-tag mr-2"></i>${p.jenis || '-'}</p>
+            <p class="text-gray-600"><i class="fas fa-map-marker-alt mr-2"></i>${p.lokasi || '-'}</p>
+            ${p.ukuran ? `<p class="text-gray-600"><i class="fas fa-ruler-combined mr-2"></i>${p.ukuran}</p>` : ''}
+            ${p.nilai ? `<p class="text-gray-600"><i class="fas fa-money-bill mr-2"></i>Rp ${p.nilai.toLocaleString()}</p>` : ''}
+          </div>
+        `).join('');
+      });
+  </script>
+</body>
+</html>

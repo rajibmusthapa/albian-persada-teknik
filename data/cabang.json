@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nama": "Kantor Pusat Parung",
+    "alamat": "Kampung Lebak Wangi, Pemagarsari, Parung, Bogor",
+    "telepon": "(021) 77974824",
+    "wa": "6281291565358",
+    "jamOperasional": "Senin-Sabtu: 08:00-17:00"
+  },
+  {
+    "id": 2,
+    "nama": "Albian Pool Shop Sawangan",
+    "alamat": "Jl. Raya Sawangan Depok No.10, Pancoran Mas, Depok",
+    "telepon": "081291565358",
+    "wa": "6281291565358",
+    "jamOperasional": "Senin-Minggu: 08:00-20:00"
+  },
+  {
+    "id": 3,
+    "nama": "Smart Pool Ciawi",
+    "alamat": "Jl. Raya Nusantara Sukabumi Km.2, Ciawi Bogor",
+    "telepon": "081280865475",
+    "wa": "6281280865475",
+    "jamOperasional": "Senin-Sabtu: 08:00-18:00"
+  }
+]

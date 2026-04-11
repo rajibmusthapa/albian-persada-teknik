@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "nama": "Keramik Roman 30x30",
+    "kategori": "Keramik",
+    "hargaJual": 197500,
+    "stok": 50,
+    "satuan": "box",
+    "cabangId": 1
+  },
+  {
+    "id": 2,
+    "nama": "Pompa Max E Pro 1HP",
+    "kategori": "Pompa",
+    "hargaJual": 12129000,
+    "stok": 5,
+    "satuan": "unit",
+    "cabangId": 1
+  },
+  {
+    "id": 3,
+    "nama": "Jasa Pasang Pompa",
+    "kategori": "Jasa",
+    "hargaJual": 2500000,
+    "stok": 999,
+    "satuan": "paket",
+    "cabangId": 1
+  }
+]
