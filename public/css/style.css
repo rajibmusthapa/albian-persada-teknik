@@ -1,0 +1,313 @@
+/* ========================================
+   ALBIAN PERSADA TEKNIK - MAIN STYLE
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f3f4f6;
+}
+
+/* ========== NAVIGATION ========== */
+.navbar {
+  background: linear-gradient(135deg, #1e3a8a, #1e40af);
+  color: white;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo i {
+  font-size: 1.8rem;
+  color: #fbbf24;
+}
+
+.logo span {
+  font-size: 0.75rem;
+  color: #93c5fd;
+  display: block;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #fbbf24;
+}
+
+/* ========== BUTTONS ========== */
+.btn-primary {
+  background-color: #fbbf24;
+  color: #1e3a8a;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #f59e0b;
+  transform: scale(1.05);
+}
+
+.btn-secondary {
+  background-color: #10b981;
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #059669;
+  transform: scale(1.05);
+}
+
+/* ========== HERO SECTION ========== */
+.hero {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+  text-align: center;
+  padding: 6rem 1rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero h1 span {
+  color: #fbbf24;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ========== STATS SECTION ========== */
+.stats {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: white;
+  padding: 3rem 1rem;
+}
+
+.stats-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+
+.stat-item i {
+  font-size: 2.5rem;
+  color: #fbbf24;
+  margin-bottom: 0.5rem;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* ========== CARDS ========== */
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.card-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.2);
+}
+
+.card i {
+  font-size: 3rem;
+  color: #1e3a8a;
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* ========== WHATSAPP FLOAT ========== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25d366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 100;
+  text-decoration: none;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  background-color: #128c7e;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  background-color: #1f2937;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  margin-top: 3rem;
+}
+
+.footer a {
+  color: #fbbf24;
+  text-decoration: none;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.social-links a {
+  color: white;
+  font-size: 1.25rem;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: #fbbf24;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .navbar .container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .nav-links a {
+    margin: 0 0.75rem;
+  }
+  
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========== ANIMATION ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}

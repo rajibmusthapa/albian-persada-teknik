@@ -4,58 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Layanan - ALBIAN PERSADA TEKNIK</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    .service-card { transition: all 0.3s ease; }
-    .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.2); }
-    .hero-bg { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
-  </style>
 </head>
-<body class="bg-gray-50">
-  <nav class="bg-gradient-to-r from-blue-900 to-blue-800 text-white p-4 sticky top-0 z-50 shadow-xl">
-    <div class="container mx-auto flex flex-wrap justify-between items-center">
-      <div class="flex items-center space-x-3">
-        <i class="fas fa-swimmer text-2xl text-yellow-400"></i>
-        <div>
-          <h1 class="text-2xl font-bold">ALBIAN PERSADA TEKNIK</h1>
-          <p class="text-xs text-blue-200">Spesialis Kolam Renang & Waterpark</p>
-        </div>
+<body>
+  <a href="https://wa.me/6281291565358?text=Halo%20ALBIAN%20PERSADA%20TEKNIK" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <i class="fas fa-swimmer"></i>
+        <div>ALBIAN PERSADA TEKNIK<span>Spesialis Kolam Renang & Waterpark</span></div>
       </div>
-      <div class="space-x-4 mt-2 sm:mt-0">
-        <a href="index.html" class="hover:text-yellow-400 transition">Beranda</a>
-        <a href="layanan.html" class="text-yellow-400 transition">Layanan</a>
-        <a href="proyek.html" class="hover:text-yellow-400 transition">Proyek</a>
-        <a href="produk.html" class="hover:text-yellow-400 transition">Produk</a>
-        <a href="tentang.html" class="hover:text-yellow-400 transition">Tentang</a>
-        <a href="kontak.html" class="hover:text-yellow-400 transition">Kontak</a>
+      <div class="nav-links">
+        <a href="index.html">Beranda</a>
+        <a href="layanan.html">Layanan</a>
+        <a href="proyek.html">Proyek</a>
+        <a href="produk.html">Produk</a>
+        <a href="tentang.html">Tentang</a>
+        <a href="kontak.html">Kontak</a>
       </div>
     </div>
   </nav>
 
-  <section class="hero-bg text-white py-20 text-center">
-    <div class="container mx-auto px-4">
-      <h1 class="text-5xl font-bold mb-4">Layanan Kami</h1>
-      <p class="text-xl">Solusi lengkap untuk semua kebutuhan kolam renang Anda</p>
-    </div>
+  <section class="hero" style="padding: 4rem 1rem;">
+    <h1>Layanan <span>Kami</span></h1>
+    <p>Solusi lengkap untuk semua kebutuhan kolam renang Anda</p>
   </section>
 
-  <section class="container mx-auto py-16 px-4">
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="service-card bg-white p-6 rounded-2xl shadow-lg text-center"><i class="fas fa-tools text-4xl text-blue-800 mb-4"></i><h3 class="font-bold text-xl mb-2">Maintenance Kolam</h3><p class="text-gray-600">Perawatan rutin, cleaning, vacuum, perbaikan dinding & ruang pompa</p></div>
-      <div class="service-card bg-white p-6 rounded-2xl shadow-lg text-center"><i class="fas fa-drafting-compass text-4xl text-blue-800 mb-4"></i><h3 class="font-bold text-xl mb-2">Desain & Konstruksi</h3><p class="text-gray-600">Kolam semi overflow, skimmer, infinity, struktur & arsitektur</p></div>
-      <div class="service-card bg-white p-6 rounded-2xl shadow-lg text-center"><i class="fas fa-water text-4xl text-blue-800 mb-4"></i><h3 class="font-bold text-xl mb-2">Waterpark</h3><p class="text-gray-600">Waterpark komersial, kolam ombak, seluncuran air, splash pad</p></div>
-      <div class="service-card bg-white p-6 rounded-2xl shadow-lg text-center"><i class="fas fa-pipe-valve text-4xl text-blue-800 mb-4"></i><h3 class="font-bold text-xl mb-2">Instalasi Pipa</h3><p class="text-gray-600">Pipa PVC, Galvanized, Stainless Steel, sistem filtrasi & sirkulasi</p></div>
-      <div class="service-card bg-white p-6 rounded-2xl shadow-lg text-center"><i class="fas fa-home text-4xl text-blue-800 mb-4"></i><h3 class="font-bold text-xl mb-2">Interior & Eksterior</h3><p class="text-gray-600">Villa, resort, hotel, apartemen dengan desain eksklusif</p></div>
-      <div class="service-card bg-white p-6 rounded-2xl shadow-lg text-center"><i class="fas fa-fish text-4xl text-blue-800 mb-4"></i><h3 class="font-bold text-xl mb-2">Kolam Ikan & Landscape</h3><p class="text-gray-600">Kolam koi, air terjun artifisial, water feature, garden landscape</p></div>
+  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 3rem 1rem;">
+    <div class="card-grid">
+      <div class="card"><i class="fas fa-tools"></i><h3>Maintenance Kolam</h3><p>Perawatan rutin, cleaning, vacuum, perbaikan dinding & ruang pompa</p></div>
+      <div class="card"><i class="fas fa-drafting-compass"></i><h3>Desain & Konstruksi</h3><p>Kolam semi overflow, skimmer, infinity, struktur & arsitektur</p></div>
+      <div class="card"><i class="fas fa-water"></i><h3>Waterpark</h3><p>Waterpark komersial, kolam ombak, seluncuran air, splash pad</p></div>
+      <div class="card"><i class="fas fa-pipe-valve"></i><h3>Instalasi Pipa</h3><p>Pipa PVC, Galvanized, Stainless Steel, sistem filtrasi & sirkulasi</p></div>
+      <div class="card"><i class="fas fa-home"></i><h3>Interior & Eksterior</h3><p>Villa, resort, hotel, apartemen dengan desain eksklusif</p></div>
+      <div class="card"><i class="fas fa-fish"></i><h3>Kolam Ikan & Landscape</h3><p>Kolam koi, air terjun artifisial, water feature, garden landscape</p></div>
     </div>
-  </section>
+  </div>
 
-  <footer class="bg-gray-800 text-white py-8 text-center">
+  <footer class="footer">
     <p>&copy; 2025 ALBIAN PERSADA TEKNIK</p>
-    <p class="mt-2">📍 Parung | Sawangan | Ciawi</p>
+    <p>📍 Parung | Sawangan | Ciawi</p>
     <p>📞 WA: 0812 9156 5358 | Telepon: (021) 77974824</p>
-    <p class="text-sm mt-4">Website by <strong class="text-yellow-400">RDS Rajib Digital Solution</strong> | Developer: <strong class="text-yellow-400">Rajib Dev</strong></p>
+    <div class="social-links">
+      <a href="https://www.youtube.com/@albianpool" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com/albianpoolgroup" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/albianpoolgroup" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+    <p class="footer-credit">Website by <strong>RDS Rajib Digital Solution</strong> | Developer: <strong>Rajib Dev</strong></p>
   </footer>
 </body>
 </html>

@@ -4,44 +4,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Proyek - ALBIAN PERSADA TEKNIK</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    .project-card { transition: all 0.3s ease; }
-    .project-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.2); }
+    .project-card { background: white; border-radius: 1rem; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); transition: all 0.3s; }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.2); }
+    .project-header { background: #1e3a8a; color: white; padding: 1rem; }
+    .project-body { padding: 1rem; }
+    .status-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: bold; }
+    .status-selesai { background: #d1fae5; color: #065f46; }
+    .status-proses { background: #fef3c7; color: #92400e; }
   </style>
 </head>
-<body class="bg-gray-50">
-  <nav class="bg-gradient-to-r from-blue-900 to-blue-800 text-white p-4 sticky top-0 z-50 shadow-xl">
-    <div class="container mx-auto flex flex-wrap justify-between items-center">
-      <div class="flex items-center space-x-3">
-        <i class="fas fa-swimmer text-2xl text-yellow-400"></i>
-        <div><h1 class="text-2xl font-bold">ALBIAN PERSADA TEKNIK</h1><p class="text-xs text-blue-200">Spesialis Kolam Renang & Waterpark</p></div>
+<body>
+  <a href="https://wa.me/6281291565358?text=Halo%20ALBIAN%20PERSADA%20TEKNIK" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <i class="fas fa-swimmer"></i>
+        <div>ALBIAN PERSADA TEKNIK<span>Spesialis Kolam Renang & Waterpark</span></div>
       </div>
-      <div class="space-x-4 mt-2 sm:mt-0">
-        <a href="index.html" class="hover:text-yellow-400 transition">Beranda</a>
-        <a href="layanan.html" class="hover:text-yellow-400 transition">Layanan</a>
-        <a href="proyek.html" class="text-yellow-400 transition">Proyek</a>
-        <a href="produk.html" class="hover:text-yellow-400 transition">Produk</a>
-        <a href="tentang.html" class="hover:text-yellow-400 transition">Tentang</a>
-        <a href="kontak.html" class="hover:text-yellow-400 transition">Kontak</a>
+      <div class="nav-links">
+        <a href="index.html">Beranda</a>
+        <a href="layanan.html">Layanan</a>
+        <a href="proyek.html">Proyek</a>
+        <a href="produk.html">Produk</a>
+        <a href="tentang.html">Tentang</a>
+        <a href="kontak.html">Kontak</a>
       </div>
     </div>
   </nav>
 
-  <section class="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20 text-center">
-    <h1 class="text-5xl font-bold mb-4">Proyek Kami</h1>
-    <p class="text-xl">Berikut adalah proyek yang telah kami selesaikan dengan baik</p>
+  <section class="hero" style="padding: 4rem 1rem;">
+    <h1>Proyek <span>Kami</span></h1>
+    <p>Berikut adalah proyek yang telah kami selesaikan dengan baik</p>
   </section>
 
-  <section class="container mx-auto py-16 px-4">
-    <div id="daftar-proyek" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-  </section>
+  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 3rem 1rem;">
+    <div id="daftar-proyek" class="card-grid"></div>
+  </div>
 
-  <footer class="bg-gray-800 text-white py-8 text-center">
+  <footer class="footer">
     <p>&copy; 2025 ALBIAN PERSADA TEKNIK</p>
+    <p>📍 Parung | Sawangan | Ciawi</p>
     <p>📞 WA: 0812 9156 5358 | Telepon: (021) 77974824</p>
-    <p class="text-sm mt-4">Website by <strong class="text-yellow-400">RDS Rajib Digital Solution</strong> | Developer: <strong class="text-yellow-400">Rajib Dev</strong></p>
+    <div class="social-links">
+      <a href="https://www.youtube.com/@albianpool" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com/albianpoolgroup" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/albianpoolgroup" target="_blank"><i class="fab fa-facebook"></i></a>
+    </div>
+    <p class="footer-credit">Website by <strong>RDS Rajib Digital Solution</strong> | Developer: <strong>Rajib Dev</strong></p>
   </footer>
 
   <script>
@@ -50,13 +65,13 @@
       .then(data => {
         const container = document.getElementById('daftar-proyek');
         container.innerHTML = data.map(p => `
-          <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div class="bg-blue-800 text-white p-3"><h3 class="font-bold text-lg">${p.nama}</h3></div>
-            <div class="p-4">
-              <p class="text-gray-600 mb-2"><i class="fas fa-tag mr-2 text-blue-600"></i>${p.jenis || '-'}</p>
-              <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt mr-2 text-red-500"></i>${p.lokasi || '-'}</p>
-              ${p.ukuran ? `<p class="text-gray-600 mb-2"><i class="fas fa-ruler-combined mr-2 text-green-600"></i>${p.ukuran}</p>` : ''}
-              <span class="inline-block px-3 py-1 rounded-full text-xs ${p.status === 'Selesai' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'}">${p.status}</span>
+          <div class="project-card">
+            <div class="project-header"><h3><i class="fas fa-swimmer"></i> ${p.nama}</h3></div>
+            <div class="project-body">
+              <p><i class="fas fa-tag"></i> ${p.jenis || '-'}</p>
+              <p><i class="fas fa-map-marker-alt"></i> ${p.lokasi || '-'}</p>
+              ${p.ukuran ? `<p><i class="fas fa-ruler-combined"></i> ${p.ukuran}</p>` : ''}
+              <span class="status-badge ${p.status === 'Selesai' ? 'status-selesai' : 'status-proses'}">${p.status}</span>
             </div>
           </div>
         `).join('');

@@ -3,140 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ALBIAN PERSADA TEKNIK | Spesialis Kolam Renang & Waterpark</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>ALBIAN PERSADA TEKNIK - Spesialis Kolam Renang & Waterpark</title>
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    .hero-bg {
-      background-image: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%), url('https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
-    .service-card, .product-card, .cabang-card {
-      transition: all 0.3s ease;
-    }
-    .service-card:hover, .product-card:hover, .cabang-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 25px -12px rgba(0,0,0,0.2);
-    }
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 100;
-      transition: all 0.3s ease;
-    }
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .fade-in-up {
-      animation: fadeInUp 0.6s ease-out;
-    }
-  </style>
 </head>
-<body class="bg-gray-50">
-  <!-- WhatsApp Float -->
-  <a href="https://wa.me/6281291565358?text=Halo%20ALBIAN%20PERSADA%20TEKNIK%0A%0A*Saya%20menghubungi%20dari%20WEBSITE*%0A%0ANama:%20%0AKebutuhan:%20%0A%0ATolong%20dibantu%20konsultasi%20untuk:" target="_blank" class="whatsapp-float bg-green-500 text-white p-4 rounded-full shadow-xl hover:bg-green-600 transition"><i class="fab fa-whatsapp text-2xl"></i></a>
+<body>
+  <a href="https://wa.me/6281291565358?text=Halo%20ALBIAN%20PERSADA%20TEKNIK" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
-  <!-- Navigation -->
-  <nav class="bg-gradient-to-r from-blue-900 to-blue-800 text-white p-4 sticky top-0 z-50 shadow-xl">
-    <div class="container mx-auto flex flex-wrap justify-between items-center">
-      <div class="flex items-center space-x-3">
-        <i class="fas fa-swimmer text-2xl text-yellow-400"></i>
-        <div>
-          <h1 class="text-2xl font-bold">ALBIAN PERSADA TEKNIK</h1>
-          <p class="text-xs text-blue-200">Spesialis Kolam Renang & Waterpark</p>
-        </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <i class="fas fa-swimmer"></i>
+        <div>ALBIAN PERSADA TEKNIK<span>Spesialis Kolam Renang & Waterpark</span></div>
       </div>
-      <div class="space-x-4 mt-2 sm:mt-0">
-        <a href="index.html" class="hover:text-yellow-400 transition">Beranda</a>
-        <a href="layanan.html" class="hover:text-yellow-400 transition">Layanan</a>
-        <a href="proyek.html" class="hover:text-yellow-400 transition">Proyek</a>
-        <a href="produk.html" class="hover:text-yellow-400 transition">Produk</a>
-        <a href="tentang.html" class="hover:text-yellow-400 transition">Tentang</a>
-        <a href="kontak.html" class="hover:text-yellow-400 transition">Kontak</a>
+      <div class="nav-links">
+        <a href="index.html">Beranda</a>
+        <a href="layanan.html">Layanan</a>
+        <a href="proyek.html">Proyek</a>
+        <a href="produk.html">Produk</a>
+        <a href="tentang.html">Tentang</a>
+        <a href="kontak.html">Kontak</a>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero-bg text-white py-32 text-center fade-in-up">
-    <div class="container mx-auto px-4">
-      <h2 class="text-5xl font-bold mb-4">Jasa Konstruksi <span class="text-yellow-400">Kolam Renang, Waterpark, Jacuzzi, Whirlpool, Landscape, Renovasi Exterior & Interior</span></h2>
-      <p class="text-xl mb-6">15+ Tahun Pengalaman • Proyek Residensial hingga Top Olympic</p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="kontak.html" class="bg-yellow-500 text-blue-900 px-8 py-3 rounded-full font-bold hover:bg-yellow-400 transition transform hover:scale-105 inline-block shadow-lg">Konsultasi Gratis</a>
-        <a href="https://www.tokopedia.com/albianpool" target="_blank" class="bg-green-500 text-white px-8 py-3 rounded-full font-bold hover:bg-green-400 transition transform hover:scale-105 inline-block shadow-lg">🛒 Belanja di Tokopedia</a>
-      </div>
+  <!-- Hero -->
+  <section class="hero fade-in-up">
+    <h1>Jasa Konstruksi <span>Kolam Renang, Waterpark, Jacuzzi, Whirlpool, Landscape, Renovasi Exterior & Interior</span></h1>
+    <p>15+ Tahun Pengalaman • Proyek Residensial hingga Top Olympic</p>
+    <a href="kontak.html" class="btn-primary">Konsultasi Gratis</a>
+    <a href="https://www.tokopedia.com/albianpool" target="_blank" class="btn-secondary" style="margin-left: 1rem;">🛒 Belanja di Tokopedia</a>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat-item"><i class="fas fa-clock"></i><div class="stat-number">15+</div><div>Tahun Pengalaman</div></div>
+      <div class="stat-item"><i class="fas fa-swimming-pool"></i><div class="stat-number">100+</div><div>Proyek Selesai</div></div>
+      <div class="stat-item"><i class="fas fa-box"></i><div class="stat-number">3.888+</div><div>Produk Terjual</div></div>
+      <div class="stat-item"><i class="fas fa-trophy"></i><div class="stat-number">Top</div><div>Olympic Experience</div></div>
     </div>
   </section>
 
-  <!-- Stats Section -->
-  <section class="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-12">
-    <div class="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-      <div><i class="fas fa-clock text-4xl mb-2 text-yellow-400"></i><p class="text-3xl font-bold">15+</p><p>Tahun Pengalaman</p></div>
-      <div><i class="fas fa-swimming-pool text-4xl mb-2 text-yellow-400"></i><p class="text-3xl font-bold">100+</p><p>Proyek Selesai</p></div>
-      <div><i class="fas fa-box text-4xl mb-2 text-yellow-400"></i><p class="text-3xl font-bold">3.888+</p><p>Produk Terjual</p></div>
-      <div><i class="fas fa-trophy text-4xl mb-2 text-yellow-400"></i><p class="text-3xl font-bold">Top</p><p>Olympic Experience</p></div>
+  <!-- Layanan -->
+  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 3rem 1rem;">
+    <h2 class="section-title">Layanan Unggulan</h2>
+    <p class="section-subtitle">Kami melayani berbagai kebutuhan kolam renang Anda</p>
+    <div class="card-grid">
+      <div class="card"><i class="fas fa-tools"></i><h3>Maintenance</h3><p>Perawatan rutin, cleaning, vacuum, perbaikan kolam</p></div>
+      <div class="card"><i class="fas fa-drafting-compass"></i><h3>Desain & Konstruksi</h3><p>Desain arsitektur hingga pembangunan kolam baru</p></div>
+      <div class="card"><i class="fas fa-water"></i><h3>Waterpark</h3><p>Desain dan konstruksi waterpark standar tinggi</p></div>
     </div>
-  </section>
-
-  <!-- Layanan Preview -->
-  <section class="container mx-auto py-16 px-4">
-    <h3 class="text-3xl font-bold text-center mb-4">Layanan Unggulan</h3>
-    <p class="text-center text-gray-600 mb-12">Kami melayani berbagai kebutuhan kolam renang Anda</p>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="service-card bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-2xl transition cursor-pointer"><i class="fas fa-tools text-4xl text-blue-800 mb-4"></i><h4 class="text-xl font-bold">Maintenance</h4><p class="text-gray-600">Perawatan rutin, cleaning, vacuum, perbaikan kolam</p></div>
-      <div class="service-card bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-2xl transition cursor-pointer"><i class="fas fa-drafting-compass text-4xl text-blue-800 mb-4"></i><h4 class="text-xl font-bold">Desain & Konstruksi</h4><p class="text-gray-600">Desain arsitektur hingga pembangunan kolam baru</p></div>
-      <div class="service-card bg-white p-6 rounded-2xl shadow-lg text-center hover:shadow-2xl transition cursor-pointer"><i class="fas fa-water text-4xl text-blue-800 mb-4"></i><h4 class="text-xl font-bold">Waterpark</h4><p class="text-gray-600">Desain dan konstruksi waterpark dengan standar tinggi</p></div>
-    </div>
-  </section>
-
-  <!-- Cabang -->
-  <section class="bg-gray-100 py-16">
-    <div class="container mx-auto px-4">
-      <h3 class="text-3xl font-bold text-center mb-4">📍 Lokasi & Cabang</h3>
-      <p class="text-center text-gray-600 mb-12">Kunjungi cabang terdekat dari lokasi Anda</p>
-      <div class="grid md:grid-cols-3 gap-8" id="cabangList"></div>
-    </div>
-  </section>
+  </div>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-8">
-    <div class="container mx-auto px-4 text-center">
-      <p>&copy; 2025 ALBIAN PERSADA TEKNIK</p>
-      <p class="mt-2">📍 Kantor Pusat: Kampung Lebak Wangi, Pemagarsari, Parung, Bogor</p>
-      <p class="mt-1">📞 Telepon: (021) 77974824 | WA: 0812 9156 5358</p>
-      <div class="flex justify-center gap-4 mt-4">
-        <a href="https://www.youtube.com/@albianpool" target="_blank" class="hover:text-yellow-400 transition"><i class="fab fa-youtube text-xl"></i></a>
-        <a href="https://www.instagram.com/albianpoolgroup" target="_blank" class="hover:text-yellow-400 transition"><i class="fab fa-instagram text-xl"></i></a>
-        <a href="https://www.facebook.com/albianpoolgroup" target="_blank" class="hover:text-yellow-400 transition"><i class="fab fa-facebook text-xl"></i></a>
-      </div>
-      <p class="text-sm mt-4">Website by <strong class="text-yellow-400">RDS Rajib Digital Solution</strong> | Developer: <strong class="text-yellow-400">Rajib Dev</strong></p>
+  <footer class="footer">
+    <p>&copy; 2025 ALBIAN PERSADA TEKNIK</p>
+    <p>📍 Kantor Pusat: Kampung Lebak Wangi, Pemagarsari, Parung, Bogor</p>
+    <p>📞 Telepon: (021) 77974824 | WA: 0812 9156 5358</p>
+    <div class="social-links">
+      <a href="https://www.youtube.com/@albianpool" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com/albianpoolgroup" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/albianpoolgroup" target="_blank"><i class="fab fa-facebook"></i></a>
     </div>
+    <p class="footer-credit">Website by <strong>RDS Rajib Digital Solution</strong> | Developer: <strong>Rajib Dev</strong></p>
   </footer>
 
   <script>
     fetch('/api/cabang')
       .then(res => res.json())
-      .then(cabang => {
-        const container = document.getElementById('cabangList');
-        if (container) {
-          container.innerHTML = cabang.map(c => `
-            <div class="cabang-card bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition cursor-pointer">
-              <i class="fas fa-store text-3xl text-blue-800 mb-3"></i>
-              <h4 class="font-bold text-xl mb-2">${c.nama}</h4>
-              <p class="text-gray-600 text-sm mb-2"><i class="fas fa-map-marker-alt mr-1 text-red-500"></i> ${c.alamat}</p>
-              <p class="text-gray-600 text-sm mb-1"><i class="fas fa-phone mr-1 text-green-500"></i> ${c.telepon}</p>
-              <p class="text-gray-600 text-sm"><i class="fab fa-whatsapp mr-1 text-green-500"></i> ${c.wa}</p>
-            </div>
-          `).join('');
-        }
+      .then(data => {
+        console.log('Cabang:', data);
       });
   </script>
 </body>
