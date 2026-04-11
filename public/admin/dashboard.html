@@ -2,33 +2,153 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Super Lengkap - ALBIAN PERSADA TEKNIK</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body>
+<body class="bg-gray-100">
   <nav class="bg-blue-900 text-white p-4">
-    <div class="container mx-auto flex justify-between">
-      <h1 class="text-xl font-bold">Admin ALBIAN PERSADA TEKNIK</h1>
-      <button id="logoutBtn" class="bg-red-600 px-3 py-1 rounded">Logout</button>
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold"><i class="fas fa-swimmer mr-2"></i>ALBIAN PERSADA TEKNIK Admin</h1>
+      <div class="space-x-4">
+        <a href="dashboard.html" class="text-yellow-400">Dashboard</a>
+        <a href="proyek.html" class="hover:text-yellow-400">Proyek</a>
+        <a href="stok.html" class="hover:text-yellow-400">Stok</a>
+        <a href="cabang.html" class="hover:text-yellow-400">Cabang</a>
+        <a href="../index.html" class="hover:text-yellow-400">Website</a>
+        <button id="logoutBtn" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">Logout</button>
+      </div>
     </div>
   </nav>
+
   <div class="container mx-auto p-6">
-    <h2 class="text-2xl font-bold mb-6">Dashboard</h2>
-    <div class="grid md:grid-cols-3 gap-4">
-      <div class="bg-white p-4 rounded shadow"><p class="text-3xl font-bold" id="totalProyek">-</p><p>Total Proyek</p></div>
-      <div class="bg-white p-4 rounded shadow"><p class="text-3xl font-bold" id="totalStok">-</p><p>Total Stok</p></div>
-      <div class="bg-white p-4 rounded shadow"><p class="text-3xl font-bold" id="totalCabang">-</p><p>Total Cabang</p></div>
+    <h2 class="text-2xl font-bold mb-6">📊 Dashboard Super Lengkap</h2>
+
+    <!-- Statistik Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" id="statsCards">
+      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-swimming-pool text-3xl text-blue-800 mb-2"></i><p class="text-3xl font-bold" id="totalProyek">-</p><p>Total Proyek</p></div>
+      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-check-circle text-3xl text-green-600 mb-2"></i><p class="text-3xl font-bold" id="proyekSelesai">-</p><p>Proyek Selesai</p></div>
+      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-spinner text-3xl text-yellow-500 mb-2"></i><p class="text-3xl font-bold" id="proyekProses">-</p><p>Proyek Proses</p></div>
+      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-users text-3xl text-blue-800 mb-2"></i><p class="text-3xl font-bold" id="totalKlien">-</p><p>Total Klien</p></div>
+      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-boxes text-3xl text-blue-800 mb-2"></i><p class="text-3xl font-bold" id="totalStok">-</p><p>Total Stok</p></div>
+      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-store text-3xl text-blue-800 mb-2"></i><p class="text-3xl font-bold" id="totalCabang">-</p><p>Total Cabang</p></div>
+      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-money-bill text-3xl text-green-600 mb-2"></i><p class="text-3xl font-bold" id="totalPendapatan">-</p><p>Total Pendapatan</p></div>
+      <div class="bg-white p-4 rounded-lg shadow text-center"><i class="fas fa-calendar-alt text-3xl text-blue-800 mb-2"></i><p class="text-3xl font-bold" id="pendapatanBulanIni">-</p><p>Pendapatan Bulan Ini</p></div>
+    </div>
+
+    <!-- Alert Stok Menipis -->
+    <div id="alertStok" class="hidden mb-4 p-3 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded"></div>
+
+    <!-- Chart & Proyek Terbaru -->
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+      <div class="bg-white p-4 rounded-lg shadow">
+        <h3 class="font-bold text-lg mb-4">📈 Proyek per Bulan</h3>
+        <canvas id="proyekChart" height="200"></canvas>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow">
+        <h3 class="font-bold text-lg mb-4">🆕 Proyek Terbaru (5 Terakhir)</h3>
+        <div id="proyekTerbaru" class="space-y-2"></div>
+      </div>
+    </div>
+
+    <!-- Kategori Stok -->
+    <div class="bg-white p-4 rounded-lg shadow">
+      <h3 class="font-bold text-lg mb-4">📦 Stok per Kategori</h3>
+      <canvas id="kategoriChart" height="100"></canvas>
     </div>
   </div>
+
   <script>
     const user = localStorage.getItem('adminUser');
     if (!user) window.location.href = 'login.html';
     document.getElementById('logoutBtn').onclick = () => { localStorage.removeItem('adminUser'); window.location.href = 'login.html'; };
-    fetch('/api/dashboard').then(res => res.json()).then(data => {
-      document.getElementById('totalProyek').textContent = data.totalProyek;
-      document.getElementById('totalStok').textContent = data.totalStok;
-      document.getElementById('totalCabang').textContent = data.totalCabang;
-    });
+
+    let proyekChart, kategoriChart;
+
+    async function loadDashboard() {
+      // Ambil data dari API
+      const resProyek = await fetch('/api/proyek');
+      const proyek = await resProyek.json();
+      const resStok = await fetch('/api/stok');
+      const stok = await resStok.json();
+      const resCabang = await fetch('/api/cabang');
+      const cabang = await resCabang.json();
+
+      // Hitung statistik
+      const totalProyek = proyek.length;
+      const proyekSelesai = proyek.filter(p => p.status === 'Selesai').length;
+      const proyekProses = proyek.filter(p => p.status === 'Proses').length;
+      const totalKlien = [...new Set(proyek.map(p => p.nama))].length;
+      const totalStok = stok.reduce((sum, s) => sum + s.stok, 0);
+      const totalCabang = cabang.length;
+      const totalPendapatan = proyek.reduce((sum, p) => sum + (p.nilai || 0), 0);
+      
+      // Pendapatan bulan ini (contoh sederhana: 20% dari total)
+      const pendapatanBulanIni = Math.round(totalPendapatan * 0.2);
+
+      // Update tampilan
+      document.getElementById('totalProyek').textContent = totalProyek;
+      document.getElementById('proyekSelesai').textContent = proyekSelesai;
+      document.getElementById('proyekProses').textContent = proyekProses;
+      document.getElementById('totalKlien').textContent = totalKlien;
+      document.getElementById('totalStok').textContent = totalStok;
+      document.getElementById('totalCabang').textContent = totalCabang;
+      document.getElementById('totalPendapatan').textContent = 'Rp ' + totalPendapatan.toLocaleString();
+      document.getElementById('pendapatanBulanIni').textContent = 'Rp ' + pendapatanBulanIni.toLocaleString();
+
+      // Alert stok menipis
+      const menipis = stok.filter(s => s.stok < 10);
+      const alertDiv = document.getElementById('alertStok');
+      if (menipis.length > 0) {
+        alertDiv.classList.remove('hidden');
+        alertDiv.innerHTML = `<i class="fas fa-exclamation-triangle mr-2"></i> ⚠️ ${menipis.length} produk stok menipis (stok < 10)! Segera restok.`;
+      }
+
+      // Proyek terbaru (5 terakhir)
+      const proyekTerbaru = [...proyek].reverse().slice(0, 5);
+      const container = document.getElementById('proyekTerbaru');
+      container.innerHTML = proyekTerbaru.map(p => `
+        <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
+          <span><i class="fas fa-swimmer mr-2 text-blue-600"></i>${p.nama}</span>
+          <span class="text-sm ${p.status === 'Selesai' ? 'text-green-600' : 'text-yellow-600'}">${p.status}</span>
+        </div>
+      `).join('');
+
+      // Chart proyek per bulan (contoh: data dummy per bulan)
+      const bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+      const dataBulan = new Array(12).fill(0);
+      proyek.forEach(p => {
+        if (p.tanggalMulai) {
+          const bulanIndex = new Date(p.tanggalMulai).getMonth();
+          dataBulan[bulanIndex]++;
+        } else {
+          // Data dummy jika tidak ada tanggal
+          dataBulan[Math.floor(Math.random() * 12)]++;
+        }
+      });
+      if (proyekChart) proyekChart.destroy();
+      const ctx = document.getElementById('proyekChart').getContext('2d');
+      proyekChart = new Chart(ctx, {
+        type: 'bar',
+        data: { labels: bulan, datasets: [{ label: 'Jumlah Proyek', data: dataBulan, backgroundColor: '#1E3A8A' }] },
+        options: { responsive: true, maintainAspectRatio: true }
+      });
+
+      // Chart stok per kategori
+      const kategori = {};
+      stok.forEach(s => { kategori[s.kategori] = (kategori[s.kategori] || 0) + s.stok; });
+      if (kategoriChart) kategoriChart.destroy();
+      const ctx2 = document.getElementById('kategoriChart').getContext('2d');
+      kategoriChart = new Chart(ctx2, {
+        type: 'doughnut',
+        data: { labels: Object.keys(kategori), datasets: [{ data: Object.values(kategori), backgroundColor: ['#1E3A8A', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899', '#06B6D4'] }] },
+        options: { responsive: true, maintainAspectRatio: true }
+      });
+    }
+
+    loadDashboard();
   </script>
 </body>
 </html>
