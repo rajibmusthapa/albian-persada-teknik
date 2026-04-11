@@ -8,33 +8,35 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-  <nav class="bg-blue-900 text-white p-4 sticky top-0 z-50">
-    <div class="container mx-auto flex justify-between">
-      <h1 class="text-2xl font-bold"><i class="fas fa-swimmer mr-2"></i>ALBIAN PERSADA TEKNIK</h1>
-      <div class="space-x-4">
-        <a href="index.html" class="hover:text-yellow-400">Beranda</a>
-        <a href="layanan.html" class="hover:text-yellow-400">Layanan</a>
-        <a href="proyek.html" class="hover:text-yellow-400">Proyek</a>
-        <a href="produk.html" class="hover:text-yellow-400">Produk</a>
-        <a href="tentang.html" class="hover:text-yellow-400">Tentang</a>
-        <a href="kontak.html" class="text-yellow-400">Kontak</a>
+  <nav class="bg-gradient-to-r from-blue-900 to-blue-800 text-white p-4 sticky top-0 z-50 shadow-xl">
+    <div class="container mx-auto flex flex-wrap justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <i class="fas fa-swimmer text-2xl text-yellow-400"></i>
+        <div><h1 class="text-2xl font-bold">ALBIAN PERSADA TEKNIK</h1><p class="text-xs text-blue-200">Spesialis Kolam Renang & Waterpark</p></div>
+      </div>
+      <div class="space-x-4 mt-2 sm:mt-0">
+        <a href="index.html" class="hover:text-yellow-400 transition">Beranda</a>
+        <a href="layanan.html" class="hover:text-yellow-400 transition">Layanan</a>
+        <a href="proyek.html" class="hover:text-yellow-400 transition">Proyek</a>
+        <a href="produk.html" class="hover:text-yellow-400 transition">Produk</a>
+        <a href="tentang.html" class="hover:text-yellow-400 transition">Tentang</a>
+        <a href="kontak.html" class="text-yellow-400 transition">Kontak</a>
       </div>
     </div>
   </nav>
 
-  <section class="bg-blue-900 text-white py-16 text-center">
-    <h1 class="text-4xl font-bold">Hubungi Kami</h1>
-    <p class="text-xl mt-2">3 Cabang siap melayani kebutuhan kolam renang Anda</p>
+  <section class="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20 text-center">
+    <h1 class="text-5xl font-bold mb-4">Hubungi Kami</h1>
+    <p class="text-xl">3 Cabang siap melayani kebutuhan kolam renang Anda</p>
   </section>
 
   <section class="container mx-auto py-16 px-4">
-    <div class="grid md:grid-cols-3 gap-6" id="cabangKontak"></div>
-
-    <div class="mt-12 bg-gray-100 p-6 rounded-xl text-center">
-      <h3 class="text-xl font-bold mb-4">📞 Hubungi Langsung</h3>
-      <p><i class="fab fa-whatsapp text-green-500 text-xl mr-2"></i> <strong>WhatsApp:</strong> 0812 9156 5358</p>
-      <p><i class="fas fa-phone text-blue-500 text-xl mr-2"></i> <strong>Telepon:</strong> (021) 77974824</p>
-      <p><i class="fas fa-envelope text-red-500 text-xl mr-2"></i> <strong>Email:</strong> albianpools@gmail.com</p>
+    <div class="grid md:grid-cols-3 gap-8" id="cabangKontak"></div>
+    <div class="mt-12 bg-gray-100 p-8 rounded-2xl text-center">
+      <h3 class="text-2xl font-bold mb-4">📞 Hubungi Langsung</h3>
+      <p><i class="fab fa-whatsapp text-green-500 text-2xl mr-2"></i> <strong>WhatsApp:</strong> 0812 9156 5358</p>
+      <p><i class="fas fa-phone text-blue-500 text-2xl mr-2"></i> <strong>Telepon:</strong> (021) 77974824</p>
+      <p><i class="fas fa-envelope text-red-500 text-2xl mr-2"></i> <strong>Email:</strong> albianpools@gmail.com</p>
     </div>
   </section>
 
@@ -50,12 +52,12 @@
       .then(cabang => {
         const container = document.getElementById('cabangKontak');
         container.innerHTML = cabang.map(c => `
-          <div class="bg-white p-6 rounded-xl shadow-lg">
+          <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition">
             <i class="fas fa-store text-3xl text-blue-800 mb-3"></i>
             <h4 class="font-bold text-xl">${c.nama}</h4>
             <p class="text-gray-600 text-sm mt-2">${c.alamat}</p>
             <p class="text-gray-600 text-sm mt-1"><i class="fas fa-phone mr-1"></i> ${c.telepon}</p>
-            <a href="https://wa.me/${c.wa}?text=Halo%20ALBIAN%20PERSADA%20TEKNIK" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded-full text-sm inline-block mt-3 hover:bg-green-600">Chat WhatsApp</a>
+            <a href="https://wa.me/${c.wa}?text=Halo%20ALBIAN%20PERSADA%20TEKNIK" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded-full text-sm inline-block mt-3 hover:bg-green-600 transition">Chat WhatsApp</a>
           </div>
         `).join('');
       });

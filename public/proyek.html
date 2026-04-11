@@ -6,29 +6,36 @@
   <title>Proyek - ALBIAN PERSADA TEKNIK</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .project-card { transition: all 0.3s ease; }
+    .project-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.2); }
+  </style>
 </head>
-<body>
-  <nav class="bg-blue-900 text-white p-4 sticky top-0 z-50">
-    <div class="container mx-auto flex justify-between">
-      <h1 class="text-2xl font-bold"><i class="fas fa-swimmer mr-2"></i>ALBIAN PERSADA TEKNIK</h1>
-      <div class="space-x-4">
-        <a href="index.html" class="hover:text-yellow-400">Beranda</a>
-        <a href="layanan.html" class="hover:text-yellow-400">Layanan</a>
-        <a href="proyek.html" class="text-yellow-400">Proyek</a>
-        <a href="produk.html" class="hover:text-yellow-400">Produk</a>
-        <a href="tentang.html" class="hover:text-yellow-400">Tentang</a>
-        <a href="kontak.html" class="hover:text-yellow-400">Kontak</a>
+<body class="bg-gray-50">
+  <nav class="bg-gradient-to-r from-blue-900 to-blue-800 text-white p-4 sticky top-0 z-50 shadow-xl">
+    <div class="container mx-auto flex flex-wrap justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <i class="fas fa-swimmer text-2xl text-yellow-400"></i>
+        <div><h1 class="text-2xl font-bold">ALBIAN PERSADA TEKNIK</h1><p class="text-xs text-blue-200">Spesialis Kolam Renang & Waterpark</p></div>
+      </div>
+      <div class="space-x-4 mt-2 sm:mt-0">
+        <a href="index.html" class="hover:text-yellow-400 transition">Beranda</a>
+        <a href="layanan.html" class="hover:text-yellow-400 transition">Layanan</a>
+        <a href="proyek.html" class="text-yellow-400 transition">Proyek</a>
+        <a href="produk.html" class="hover:text-yellow-400 transition">Produk</a>
+        <a href="tentang.html" class="hover:text-yellow-400 transition">Tentang</a>
+        <a href="kontak.html" class="hover:text-yellow-400 transition">Kontak</a>
       </div>
     </div>
   </nav>
 
-  <section class="bg-blue-900 text-white py-16 text-center">
-    <h1 class="text-4xl font-bold">Proyek Kami</h1>
-    <p class="text-xl mt-2">Berikut adalah proyek yang telah kami selesaikan</p>
+  <section class="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20 text-center">
+    <h1 class="text-5xl font-bold mb-4">Proyek Kami</h1>
+    <p class="text-xl">Berikut adalah proyek yang telah kami selesaikan dengan baik</p>
   </section>
 
   <section class="container mx-auto py-16 px-4">
-    <div id="daftar-proyek" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <div id="daftar-proyek" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
   </section>
 
   <footer class="bg-gray-800 text-white py-8 text-center">
@@ -43,15 +50,14 @@
       .then(data => {
         const container = document.getElementById('daftar-proyek');
         container.innerHTML = data.map(p => `
-          <div class="bg-white p-6 rounded-xl shadow-lg">
-            <div class="flex justify-between items-start">
-              <h3 class="font-bold text-xl text-blue-800">${p.nama}</h3>
-              <span class="px-2 py-1 rounded-full text-xs ${p.status === 'Selesai' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'}">${p.status}</span>
+          <div class="project-card bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="bg-blue-800 text-white p-3"><h3 class="font-bold text-lg">${p.nama}</h3></div>
+            <div class="p-4">
+              <p class="text-gray-600 mb-2"><i class="fas fa-tag mr-2 text-blue-600"></i>${p.jenis || '-'}</p>
+              <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt mr-2 text-red-500"></i>${p.lokasi || '-'}</p>
+              ${p.ukuran ? `<p class="text-gray-600 mb-2"><i class="fas fa-ruler-combined mr-2 text-green-600"></i>${p.ukuran}</p>` : ''}
+              <span class="inline-block px-3 py-1 rounded-full text-xs ${p.status === 'Selesai' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'}">${p.status}</span>
             </div>
-            <p class="text-gray-600 mt-2"><i class="fas fa-tag mr-2"></i>${p.jenis || '-'}</p>
-            <p class="text-gray-600"><i class="fas fa-map-marker-alt mr-2"></i>${p.lokasi || '-'}</p>
-            ${p.ukuran ? `<p class="text-gray-600"><i class="fas fa-ruler-combined mr-2"></i>${p.ukuran}</p>` : ''}
-            ${p.nilai ? `<p class="text-gray-600"><i class="fas fa-money-bill mr-2"></i>Rp ${p.nilai.toLocaleString()}</p>` : ''}
           </div>
         `).join('');
       });
