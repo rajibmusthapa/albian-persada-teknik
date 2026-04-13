@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "kategori": "Jasa Konstruksi",
+    "nominal": 135000000,
+    "tanggal": "2026-04-01",
+    "keterangan": "Proyek Pak Yulfan, Ruli, Hikmah"
+  },
+  {
+    "id": 2,
+    "kategori": "Penjualan Produk",
+    "nominal": 50000000,
+    "tanggal": "2026-04-01",
+    "keterangan": "Penjualan dari Tokopedia"
+  },
+  {
+    "id": 3,
+    "kategori": "Maintenance",
+    "nominal": 10000000,
+    "tanggal": "2026-04-05",
+    "keterangan": "Langganan bulan Maret"
+  },
+  {
+    "id": 4,
+    "kategori": "Konsultasi",
+    "nominal": 5000000,
+    "tanggal": "2026-04-10",
+    "keterangan": "Konsultasi online"
+  },
+  {
+    "id": 1775968193949,
+    "kategori": "Test Lokal",
+    "nominal": 1000000,
+    "tanggal": "2026-04-12",
+    "keterangan": "Test dari terminal lokal"
+  }
+]

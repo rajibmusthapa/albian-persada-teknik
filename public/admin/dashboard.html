@@ -7,142 +7,317 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    .stat-card { transition: all 0.3s ease; }
-    .stat-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.1); }
+    body { font-family: 'Inter', sans-serif; background: #f5f5f9; }
+    .stat-card { transition: all 0.3s; border-left: 4px solid; }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+
+    /* Drawer menu untuk HP */
+    .drawer {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100%;
+      background: white;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transition: left 0.3s ease;
+      padding: 1rem;
+      overflow-y: auto;
+    }
+    .drawer.open { left: 0; }
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      display: none;
+    }
+    .drawer-overlay.show { display: block; }
+    .drawer a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #1f2937;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .drawer a:hover, .drawer a.active { background: #e0e7ff; color: #1e3a8a; }
+
+    @media (min-width: 768px) {
+      .menu-btn { display: none !important; }
+      .drawer, .drawer-overlay { display: none; }
+    }
+    @media (max-width: 767px) {
+      .desktop-menu { display: none !important; }
+    }
   </style>
 </head>
 <body class="bg-gray-50">
-  <nav class="bg-gradient-to-r from-blue-900 to-blue-800 text-white p-4 shadow-lg sticky top-0 z-50">
-    <div class="container mx-auto flex justify-between items-center">
-      <div class="flex items-center space-x-3">
-        <i class="fas fa-swimmer text-2xl text-yellow-400"></i>
-        <div>
-          <h1 class="text-xl font-bold">ALBIAN PERSADA TEKNIK</h1>
-          <p class="text-xs text-blue-200">Admin Panel</p>
-        </div>
+  <!-- Drawer Menu (KIRI) untuk HP -->
+  <div class="drawer" id="drawer">
+    <div class="flex items-center gap-3 border-b pb-4 mb-4">
+      <i class="fas fa-swimmer text-2xl text-blue-800"></i>
+      <div><h2 class="font-bold">ALBIAN PERSADA TEKNIK</h2><p class="text-xs text-gray-500">Admin Panel</p></div>
+    </div>
+    <a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt w-5 mr-2"></i> Dashboard</a>
+    <a href="proyek.html"><i class="fas fa-swimming-pool w-5 mr-2"></i> Proyek</a>
+    <a href="stok.html"><i class="fas fa-boxes w-5 mr-2"></i> Stok</a>
+    <a href="cabang.html"><i class="fas fa-store w-5 mr-2"></i> Cabang</a>
+    <a href="../index.html"><i class="fas fa-globe w-5 mr-2"></i> Website</a>
+    <div class="border-t mt-4 pt-4"><button id="logoutDrawerBtn" class="w-full text-left text-red-600 hover:bg-red-50"><i class="fas fa-sign-out-alt mr-2"></i> Logout</button></div>
+  </div>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-sm border-b sticky top-0 z-50">
+    <div class="px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <button id="menuBtn" class="menu-btn text-gray-600 text-xl focus:outline-none">
+          <i class="fas fa-bars"></i>
+        </button>
+        <i class="fas fa-swimmer text-2xl text-blue-800"></i>
+        <h1 class="text-xl font-bold text-gray-800">ALBIAN PERSADA TEKNIK</h1>
       </div>
-      <div class="space-x-4">
-        <a href="dashboard.html" class="px-3 py-2 rounded-lg bg-yellow-600 text-white">Dashboard</a>
-        <a href="proyek.html" class="px-3 py-2 rounded-lg hover:bg-blue-700 transition">Proyek</a>
-        <a href="stok.html" class="px-3 py-2 rounded-lg hover:bg-blue-700 transition">Stok</a>
-        <a href="cabang.html" class="px-3 py-2 rounded-lg hover:bg-blue-700 transition">Cabang</a>
-        <a href="../index.html" class="px-3 py-2 rounded-lg hover:bg-blue-700 transition">Website</a>
-        <button id="logoutBtn" class="bg-red-600 px-4 py-2 rounded-lg hover:bg-red-700 transition">Logout</button>
+      
+      <!-- Menu Horizontal untuk LAPTOP -->
+      <div class="desktop-menu hidden md:flex items-center gap-2">
+        <a href="dashboard.html" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 font-medium">Dashboard</a>
+        <a href="proyek.html" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">Proyek</a>
+        <a href="stok.html" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">Stok</a>
+        <a href="cabang.html" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">Cabang</a>
+        <a href="../index.html" class="px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">Website</a>
+      </div>
+      
+      <div class="flex items-center gap-4">
+        <button id="logoutBtn" class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-600 transition">Logout</button>
       </div>
     </div>
   </nav>
 
-  <div class="container mx-auto p-6">
-    <!-- Welcome Section -->
-    <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 text-white mb-8 shadow-xl">
-      <h2 class="text-3xl font-bold">Selamat Datang, Admin!</h2>
-      <p class="text-blue-100 mt-2">Kelola proyek, stok, dan cabang dengan mudah.</p>
+  <div class="p-6">
+    <!-- Header dengan Tombol Tambah Pemasukan -->
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold">📊 Dashboard</h2>
+      <button onclick="showPemasukanModal()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+        <i class="fas fa-plus mr-2"></i>Tambah Pemasukan
+      </button>
     </div>
 
-    <!-- Stats Cards Row 1 -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6" id="statsRow1">
-      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-blue-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Total Proyek</p><p class="text-3xl font-bold text-gray-800" id="totalProyek">-</p></div><i class="fas fa-swimming-pool text-4xl text-blue-600 opacity-50"></i></div></div>
-      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-green-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Proyek Selesai</p><p class="text-3xl font-bold text-gray-800" id="proyekSelesai">-</p></div><i class="fas fa-check-circle text-4xl text-green-600 opacity-50"></i></div></div>
-      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-yellow-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Proyek Proses</p><p class="text-3xl font-bold text-gray-800" id="proyekProses">-</p></div><i class="fas fa-spinner text-4xl text-yellow-600 opacity-50"></i></div></div>
-      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-purple-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Total Klien</p><p class="text-3xl font-bold text-gray-800" id="totalKlien">-</p></div><i class="fas fa-users text-4xl text-purple-600 opacity-50"></i></div></div>
+    <!-- Welcome Card -->
+    <div class="bg-gradient-to-r from-blue-800 to-blue-600 rounded-2xl p-6 mb-6 text-white">
+      <div class="flex justify-between items-center">
+        <div>
+          <h2 class="text-2xl font-bold">Selamat Datang, Admin! 🎉</h2>
+          <p class="text-blue-100 mt-1">Anda telah menyelesaikan <span id="progresProyek">0</span>% proyek bulan ini.</p>
+        </div>
+        <i class="fas fa-chart-line text-4xl opacity-50"></i>
+      </div>
     </div>
 
-    <!-- Stats Cards Row 2 -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8" id="statsRow2">
-      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-teal-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Total Stok</p><p class="text-3xl font-bold text-gray-800" id="totalStok">-</p></div><i class="fas fa-boxes text-4xl text-teal-600 opacity-50"></i></div></div>
-      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-indigo-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Total Cabang</p><p class="text-3xl font-bold text-gray-800" id="totalCabang">-</p></div><i class="fas fa-store text-4xl text-indigo-600 opacity-50"></i></div></div>
-      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-emerald-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Total Pendapatan</p><p class="text-3xl font-bold text-gray-800" id="totalPendapatan">-</p></div><i class="fas fa-money-bill-wave text-4xl text-emerald-600 opacity-50"></i></div></div>
-      <div class="stat-card bg-white rounded-xl shadow-md p-5 border-l-4 border-rose-600"><div class="flex justify-between"><div><p class="text-gray-500 text-sm">Pendapatan Bulan Ini</p><p class="text-3xl font-bold text-gray-800" id="pendapatanBulanIni">-</p></div><i class="fas fa-calendar-alt text-4xl text-rose-600 opacity-50"></i></div></div>
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+      <div class="stat-card bg-white rounded-xl p-5 border-l-blue-600 shadow-sm">
+        <div class="flex justify-between items-start">
+          <div><p class="text-gray-500 text-sm">Total Proyek</p><p class="text-2xl font-bold text-gray-800" id="totalProyek">0</p><p class="text-green-600 text-xs mt-1"><i class="fas fa-arrow-up"></i> <span id="proyekSelesai">0</span> selesai</p></div>
+          <i class="fas fa-swimming-pool text-3xl text-blue-600 opacity-50"></i>
+        </div>
+      </div>
+      <div class="stat-card bg-white rounded-xl p-5 border-l-green-600 shadow-sm">
+        <div class="flex justify-between items-start">
+          <div><p class="text-gray-500 text-sm">Total Stok</p><p class="text-2xl font-bold text-gray-800" id="totalStok">0</p><p class="text-yellow-600 text-xs mt-1"><i class="fas fa-box"></i> item tersedia</p></div>
+          <i class="fas fa-boxes text-3xl text-green-600 opacity-50"></i>
+        </div>
+      </div>
+      <div class="stat-card bg-white rounded-xl p-5 border-l-yellow-600 shadow-sm">
+        <div class="flex justify-between items-start">
+          <div><p class="text-gray-500 text-sm">Total Cabang</p><p class="text-2xl font-bold text-gray-800" id="totalCabang">0</p><p class="text-blue-600 text-xs mt-1"><i class="fas fa-store"></i> lokasi aktif</p></div>
+          <i class="fas fa-store text-3xl text-yellow-600 opacity-50"></i>
+        </div>
+      </div>
+      <div class="stat-card bg-white rounded-xl p-5 border-l-purple-600 shadow-sm">
+        <div class="flex justify-between items-start">
+          <div><p class="text-gray-500 text-sm">Total Pemasukan</p><p class="text-2xl font-bold text-gray-800" id="totalPendapatan">Rp 0</p><p class="text-green-600 text-xs mt-1"><i class="fas fa-calendar"></i> semua pemasukan</p></div>
+          <i class="fas fa-money-bill-wave text-3xl text-purple-600 opacity-50"></i>
+        </div>
+      </div>
     </div>
 
-    <!-- Alert Stok Menipis -->
-    <div id="alertStok" class="hidden mb-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded-lg shadow"></div>
-
-    <!-- Charts & Recent Projects -->
-    <div class="grid lg:grid-cols-2 gap-6 mb-6">
-      <div class="bg-white rounded-xl shadow-md p-5">
-        <h3 class="font-bold text-lg mb-4 flex items-center"><i class="fas fa-chart-line text-blue-600 mr-2"></i>📈 Proyek per Bulan</h3>
+    <!-- Charts -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+      <div class="lg:col-span-2 bg-white rounded-xl p-5 shadow-sm">
+        <h3 class="font-semibold text-gray-800 mb-4"><i class="fas fa-chart-line text-blue-600 mr-2"></i> Proyek per Bulan</h3>
         <canvas id="proyekChart" height="200"></canvas>
       </div>
-      <div class="bg-white rounded-xl shadow-md p-5">
-        <h3 class="font-bold text-lg mb-4 flex items-center"><i class="fas fa-chart-pie text-green-600 mr-2"></i>🥧 Stok per Kategori</h3>
-        <canvas id="kategoriChart" height="200"></canvas>
+      <div class="bg-white rounded-xl p-5 shadow-sm">
+        <h3 class="font-semibold text-gray-800 mb-4"><i class="fas fa-history text-blue-600 mr-2"></i> Aktivitas Terbaru</h3>
+        <div id="recentActivity" class="space-y-3"><div class="text-center text-gray-400 py-4">Memuat data...</div></div>
       </div>
     </div>
 
-    <!-- Recent Projects Table -->
-    <div class="bg-white rounded-xl shadow-md p-5">
-      <h3 class="font-bold text-lg mb-4 flex items-center"><i class="fas fa-history text-blue-600 mr-2"></i>📋 Proyek Terbaru</h3>
+    <!-- Progress & Kategori -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      <div class="bg-white rounded-xl p-5 shadow-sm">
+        <h3 class="font-semibold text-gray-800 mb-4"><i class="fas fa-chart-pie text-blue-600 mr-2"></i> Stok per Kategori</h3>
+        <canvas id="kategoriChart" height="150"></canvas>
+      </div>
+      <div class="bg-white rounded-xl p-5 shadow-sm">
+        <h3 class="font-semibold text-gray-800 mb-4"><i class="fas fa-tasks text-blue-600 mr-2"></i> Progress Proyek</h3>
+        <div class="space-y-4">
+          <div><div class="flex justify-between text-sm mb-1"><span>Proyek Selesai</span><span id="progresSelesai">0</span></div><div class="w-full bg-gray-200 rounded-full h-2"><div id="progressSelesaiBar" class="bg-green-500 rounded-full h-2" style="width: 0%"></div></div></div>
+          <div><div class="flex justify-between text-sm mb-1"><span>Proyek Proses</span><span id="progresProses">0</span></div><div class="w-full bg-gray-200 rounded-full h-2"><div id="progressProsesBar" class="bg-yellow-500 rounded-full h-2" style="width: 0%"></div></div></div>
+          <div class="pt-4 border-t"><div class="flex justify-between text-sm mb-1"><span>Target Tahunan</span><span>100%</span></div><div class="w-full bg-gray-200 rounded-full h-2"><div class="bg-blue-600 rounded-full h-2" style="width: 65%"></div></div><p class="text-xs text-gray-500 mt-2">65% menuju target</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabel Daftar Pemasukan -->
+    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+      <div class="px-5 py-4 border-b flex justify-between items-center">
+        <h3 class="font-semibold text-gray-800"><i class="fas fa-money-bill-wave text-green-600 mr-2"></i> Daftar Pemasukan</h3>
+        <button onclick="showPemasukanModal()" class="bg-green-600 text-white px-3 py-1 rounded-lg text-sm">+ Tambah</button>
+      </div>
       <div class="overflow-x-auto">
         <table class="w-full">
-          <thead class="bg-gray-100">
-            <tr><th class="p-3 text-left">Nama Proyek</th><th class="p-3 text-left">Jenis</th><th class="p-3 text-left">Lokasi</th><th class="p-3 text-left">Status</th></tr>
+          <thead class="bg-gray-50 text-gray-500 text-sm">
+            <tr><th class="p-3 text-left">Kategori</th><th class="p-3 text-left">Nominal</th><th class="p-3 text-left">Tanggal</th><th class="p-3 text-left">Keterangan</th><th class="p-3 text-left">Aksi</th></tr>
           </thead>
-          <tbody id="proyekTerbaru"></tbody>
+          <tbody id="pemasukanList"></tbody>
         </table>
       </div>
+    </div>
+  </div>
+
+  <!-- Modal Pemasukan -->
+  <div id="modalPemasukan" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-full max-w-md">
+      <h3 id="modalPemasukanTitle" class="text-xl font-bold mb-4">Tambah Pemasukan</h3>
+      <form id="pemasukanForm">
+        <input type="hidden" id="pemasukanId">
+        <div class="mb-3"><label class="block font-semibold">Kategori</label>
+          <select id="kategori" class="w-full p-2 border rounded">
+            <option>Jasa Konstruksi</option><option>Penjualan Produk</option>
+            <option>Maintenance</option><option>Konsultasi</option><option>Iklan</option><option>Lainnya</option>
+          </select>
+        </div>
+        <div class="mb-3"><label class="block font-semibold">Nominal (Rp)</label><input type="number" id="nominal" class="w-full p-2 border rounded" required></div>
+        <div class="mb-3"><label class="block font-semibold">Tanggal</label><input type="date" id="tanggal" class="w-full p-2 border rounded" required></div>
+        <div class="mb-3"><label class="block font-semibold">Keterangan</label><textarea id="keterangan" rows="2" class="w-full p-2 border rounded"></textarea></div>
+        <div class="flex justify-end gap-2 mt-4"><button type="button" onclick="hidePemasukanModal()" class="px-4 py-2 bg-gray-300 rounded">Batal</button><button type="submit" class="px-4 py-2 bg-blue-800 text-white rounded">Simpan</button></div>
+      </form>
     </div>
   </div>
 
   <script>
     const user = localStorage.getItem('adminUser');
     if (!user) window.location.href = 'login.html';
+
+    // Drawer menu
+    const menuBtn = document.getElementById('menuBtn');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawerOverlay');
+    if (menuBtn) menuBtn.onclick = () => { drawer.classList.add('open'); overlay.classList.add('show'); };
+    overlay.onclick = () => { drawer.classList.remove('open'); overlay.classList.remove('show'); };
+
+    // Logout
     document.getElementById('logoutBtn').onclick = () => { localStorage.removeItem('adminUser'); window.location.href = 'login.html'; };
+    const logoutDrawerBtn = document.getElementById('logoutDrawerBtn');
+    if (logoutDrawerBtn) logoutDrawerBtn.onclick = () => { localStorage.removeItem('adminUser'); window.location.href = 'login.html'; };
 
-    let proyekChart, kategoriChart;
+    let proyekChart, kategoriChart, pemasukanData = [];
 
-    async function loadDashboard() {
-      const resProyek = await fetch('/api/proyek');
-      const proyek = await resProyek.json();
-      const resStok = await fetch('/api/stok');
-      const stok = await resStok.json();
-      const resCabang = await fetch('/api/cabang');
-      const cabang = await resCabang.json();
+    async function loadPemasukan() {
+      const res = await fetch('/api/pemasukan');
+      pemasukanData = await res.json();
+      const total = pemasukanData.reduce((s, p) => s + p.nominal, 0);
+      document.getElementById('totalPendapatan').innerText = 'Rp ' + total.toLocaleString();
+      document.getElementById('pemasukanList').innerHTML = pemasukanData.map(p => `
+        <tr class="border-b hover:bg-gray-50">
+          <td class="p-3">${p.kategori}</td><td class="p-3 text-green-600 font-semibold">Rp ${p.nominal.toLocaleString()}</td>
+          <td class="p-3">${p.tanggal}</td><td class="p-3">${p.keterangan || '-'}</td>
+          <td class="p-3"><button onclick="editPemasukan(${p.id})" class="text-blue-600 mr-2"><i class="fas fa-edit"></i></button><button onclick="deletePemasukan(${p.id})" class="text-red-600"><i class="fas fa-trash"></i></button></td>
+        </tr>
+      `).join('');
+    }
+
+    async function loadData() {
+      const proyek = await fetch('/api/proyek').then(res => res.json());
+      const stok = await fetch('/api/stok').then(res => res.json());
+      const cabang = await fetch('/api/cabang').then(res => res.json());
 
       const totalProyek = proyek.length;
       const proyekSelesai = proyek.filter(p => p.status === 'Selesai').length;
       const proyekProses = proyek.filter(p => p.status === 'Proses').length;
-      const totalKlien = [...new Set(proyek.map(p => p.nama))].length;
-      const totalStok = stok.reduce((sum, s) => sum + s.stok, 0);
-      const totalCabang = cabang.length;
-      const totalPendapatan = proyek.reduce((sum, p) => sum + (p.nilai || 0), 0);
-      const pendapatanBulanIni = Math.round(totalPendapatan * 0.2);
+      const totalStok = stok.reduce((s, i) => s + i.stok, 0);
+      const persenSelesai = totalProyek ? (proyekSelesai / totalProyek * 100).toFixed(1) : 0;
 
-      document.getElementById('totalProyek').textContent = totalProyek;
-      document.getElementById('proyekSelesai').textContent = proyekSelesai;
-      document.getElementById('proyekProses').textContent = proyekProses;
-      document.getElementById('totalKlien').textContent = totalKlien;
-      document.getElementById('totalStok').textContent = totalStok;
-      document.getElementById('totalCabang').textContent = totalCabang;
-      document.getElementById('totalPendapatan').textContent = 'Rp ' + totalPendapatan.toLocaleString();
-      document.getElementById('pendapatanBulanIni').textContent = 'Rp ' + pendapatanBulanIni.toLocaleString();
-
-      const menipis = stok.filter(s => s.stok < 10);
-      const alertDiv = document.getElementById('alertStok');
-      if (menipis.length > 0) {
-        alertDiv.classList.remove('hidden');
-        alertDiv.innerHTML = `<i class="fas fa-exclamation-triangle mr-2"></i> ⚠️ ${menipis.length} produk stok menipis (stok < 10)! Segera lakukan restok.`;
-      }
-
-      const proyekTerbaru = [...proyek].reverse().slice(0, 5);
-      const container = document.getElementById('proyekTerbaru');
-      container.innerHTML = proyekTerbaru.map(p => `
-        <tr class="border-b hover:bg-gray-50"><td class="p-3 font-medium">${p.nama}</td><td class="p-3">${p.jenis || '-'}</td><td class="p-3">${p.lokasi || '-'}</td><td class="p-3"><span class="px-2 py-1 rounded-full text-xs ${p.status === 'Selesai' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'}">${p.status}</span></td></tr>
-      `).join('');
+      document.getElementById('totalProyek').innerText = totalProyek;
+      document.getElementById('proyekSelesai').innerText = proyekSelesai;
+      document.getElementById('totalStok').innerText = totalStok;
+      document.getElementById('totalCabang').innerText = cabang.length;
+      document.getElementById('progresProyek').innerText = persenSelesai;
+      document.getElementById('progresSelesai').innerText = proyekSelesai;
+      document.getElementById('progresProses').innerText = proyekProses;
+      document.getElementById('progressSelesaiBar').style.width = persenSelesai + '%';
+      document.getElementById('progressProsesBar').style.width = (proyekProses / totalProyek * 100).toFixed(1) + '%';
 
       const bulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
       const dataBulan = new Array(12).fill(0);
       proyek.forEach(p => { if (p.tanggalMulai) dataBulan[new Date(p.tanggalMulai).getMonth()]++; });
       if (proyekChart) proyekChart.destroy();
-      proyekChart = new Chart(document.getElementById('proyekChart'), { type: 'bar', data: { labels: bulan, datasets: [{ label: 'Jumlah Proyek', data: dataBulan, backgroundColor: '#2563EB', borderRadius: 8 }] }, options: { responsive: true, maintainAspectRatio: true } });
+      proyekChart = new Chart(document.getElementById('proyekChart'), { type: 'bar', data: { labels: bulan, datasets: [{ label: 'Proyek', data: dataBulan, backgroundColor: '#2563EB', borderRadius: 6 }] }, options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'top' } } } });
 
       const kategori = {};
       stok.forEach(s => { kategori[s.kategori] = (kategori[s.kategori] || 0) + s.stok; });
       if (kategoriChart) kategoriChart.destroy();
-      kategoriChart = new Chart(document.getElementById('kategoriChart'), { type: 'doughnut', data: { labels: Object.keys(kategori), datasets: [{ data: Object.values(kategori), backgroundColor: ['#2563EB', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899'] }] }, options: { responsive: true, maintainAspectRatio: true } });
+      kategoriChart = new Chart(document.getElementById('kategoriChart'), { type: 'doughnut', data: { labels: Object.keys(kategori), datasets: [{ data: Object.values(kategori), backgroundColor: ['#2563EB', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'] }] }, options: { responsive: true, maintainAspectRatio: true } });
+
+      const proyekTerbaru = [...proyek].reverse().slice(0, 5);
+      document.getElementById('proyekTerbaruList').innerHTML = proyekTerbaru.map(p => `<tr class="border-b hover:bg-gray-50"><td class="p-3">${p.nama}</td><td class="p-3">${p.jenis || '-'}</td><td class="p-3">${p.lokasi || '-'}</td><td class="p-3"><span class="px-2 py-1 rounded-full text-xs ${p.status === 'Selesai' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'}">${p.status}</span></td></tr>`).join('');
+
+      const aktivitas = [...proyek].reverse().slice(0, 5);
+      document.getElementById('recentActivity').innerHTML = aktivitas.map(p => `<div class="flex items-center gap-3 p-2 bg-gray-50 rounded-lg"><i class="fas fa-swimming-pool text-blue-600"></i><div><p class="text-sm font-medium">${p.nama}</p><p class="text-xs text-gray-400">Status: ${p.status}</p></div></div>`).join('');
+      
+      loadPemasukan();
     }
-    loadDashboard();
+    
+    function showPemasukanModal(id = null) {
+      document.getElementById('modalPemasukan').classList.remove('hidden');
+      document.getElementById('modalPemasukan').classList.add('flex');
+      if (id) {
+        document.getElementById('modalPemasukanTitle').textContent = 'Edit Pemasukan';
+        const p = pemasukanData.find(x => x.id == id);
+        if (p) {
+          document.getElementById('pemasukanId').value = p.id;
+          document.getElementById('kategori').value = p.kategori;
+          document.getElementById('nominal').value = p.nominal;
+          document.getElementById('tanggal').value = p.tanggal;
+          document.getElementById('keterangan').value = p.keterangan || '';
+        }
+      } else {
+        document.getElementById('modalPemasukanTitle').textContent = 'Tambah Pemasukan';
+        document.getElementById('pemasukanForm').reset();
+        document.getElementById('pemasukanId').value = '';
+      }
+    }
+    function hidePemasukanModal() { document.getElementById('modalPemasukan').classList.add('hidden'); document.getElementById('modalPemasukan').classList.remove('flex'); }
+    function editPemasukan(id) { showPemasukanModal(id); }
+    async function deletePemasukan(id) { if(confirm('Yakin hapus pemasukan ini?')) { await fetch(`/api/pemasukan/${id}`, {method:'DELETE'}); loadPemasukan(); } }
+    document.getElementById('pemasukanForm').addEventListener('submit', async(e) => {
+      e.preventDefault();
+      const id = document.getElementById('pemasukanId').value;
+      const data = { kategori: document.getElementById('kategori').value, nominal: parseInt(document.getElementById('nominal').value), tanggal: document.getElementById('tanggal').value, keterangan: document.getElementById('keterangan').value };
+      if (id) await fetch(`/api/pemasukan/${id}`, {method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+      else await fetch('/api/pemasukan', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+      hidePemasukanModal(); loadPemasukan();
+    });
+    
+    loadData();
   </script>
 </body>
 </html>
